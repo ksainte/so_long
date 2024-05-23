@@ -6,31 +6,55 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:41:40 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/22 14:14:27 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/23 15:00:35 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../so_long.h"
 
-int main()
+static	void	check_arg(int ac, char *str)
 {
-	t_program program;
-	// mlx function that initialize the mlx and returns a pointer to it.
-	program.mlx = mlx_init();
-	// Open a window (window.c whitin this project)
-	program.window = ft_new_window(program.mlx, 1980, 1080, "Hello world!");
+	if (ac < 2 || str == NULL)
+	{
+		ft_printf("Erreur\nCarte manquante : ./so_long <map>\n");
+		exit(EXIT_FAILURE);
+	}
+	else if (ac > 2)
+	{
+		ft_printf("Erreur\nTrop d'arguments : ./so_long <map>\n");
+		exit(EXIT_FAILURE);
+	}
+	while (*str != '.' && *str != '\0')
+		str++;
+	if (ft_strncmp(".ber", str, 4) != 0 || ft_strlen(str) != 4)
+	{
+		ft_printf("Erreur\nExtension du fichier carte non valide : <map>.ber");
+		exit(EXIT_FAILURE);
+	}
+	return ;
+}
+void	mdup(char *arg, t_map *data)
+{
+	char	*path;
+	int		fd;
 
-	// Create a new image/sprite (image.c)
-	program.sprite = ft_new_sprite(program.mlx, "block.xpm");
-	program.sprite_position.x = 0;
-	program.sprite_position.y = 0;
-	// mlx function that draws an image into a window at the given position
-	mlx_put_image_to_window(program.mlx, program.window.reference,
-		program.sprite.reference, program.sprite_position.x, program.sprite_position.y);
-	// hook the input() (hooks.c) function to the the key pressed event
-	mlx_key_hook(program.window.reference, *ft_input, &program);
-	// hook a function to the loop (it would be called each frame)
-	mlx_loop_hook(program.mlx, *ft_update, &program);
+	path = ft_strjoin("./maps/", arg);
+	if (!path)
+		exit(EXIT_FAILURE);
+	fd = open(path, O_RDONLY);
+	free(path);
+	if (fd == -1)
+		exit_err(errno);
+	data->map = minfo(arg, fd);
+	printf_tab(data->map);
+}
 
-	mlx_loop(program.mlx);
+int	main(int ac, char **av)
+{
+	int		check;
+	t_map	data;
+	t_hook	disp;
+
+	check_arg(ac, av[1]);
+	mdup(av[1], &data);
 }
