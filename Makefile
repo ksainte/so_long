@@ -6,13 +6,13 @@
 #    By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/21 13:23:41 by ksainte           #+#    #+#              #
-#    Updated: 2024/05/23 14:37:38 by ksainte          ###   ########.fr        #
+#    Updated: 2024/05/24 14:40:58 by ksainte          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
+CC = gcc -g3
 CFLAGS = -Wall -Wextra -Werror
-SRCS = src/main.c src/color.c src/hooks.c src/window.c src/image.c src/open.c
+SRCS = src/main.c src/color.c src/hooks.c src/window.c src/image.c src/open.c src/get_next_line.c src/get_next_line_utils.c
 LIBFT_PATH = Libft
 MLX_PATH = mlx
 LIBFT_ARCHIVE = $(LIBFT_PATH)/libft.a

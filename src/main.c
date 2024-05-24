@@ -6,55 +6,77 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:41:40 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/23 15:00:35 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/24 16:19:31 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../so_long.h"
 
-static	void	check_arg(int ac, char *str)
+// static	void	check_arg(int ac, char **argv)
+// {
+// 	if (ac < 2 || argv[1] == NULL)
+// 	{
+// 		ft_printf("Erreur\nCarte manquante : ./so_long <map>\n");
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	return ;
+// }
+
+// int	main(int argc, char **argv)
+int	main()
 {
-	if (ac < 2 || str == NULL)
-	{
-		ft_printf("Erreur\nCarte manquante : ./so_long <map>\n");
-		exit(EXIT_FAILURE);
-	}
-	else if (ac > 2)
-	{
-		ft_printf("Erreur\nTrop d'arguments : ./so_long <map>\n");
-		exit(EXIT_FAILURE);
-	}
-	while (*str != '.' && *str != '\0')
-		str++;
-	if (ft_strncmp(".ber", str, 4) != 0 || ft_strlen(str) != 4)
-	{
-		ft_printf("Erreur\nExtension du fichier carte non valide : <map>.ber");
-		exit(EXIT_FAILURE);
-	}
-	return ;
-}
-void	mdup(char *arg, t_map *data)
-{
-	char	*path;
 	int		fd;
+	// char *path;
+	size_t 	row_size;
+	// size_t column_size;
+	char *line;
+	char **tab;
 
-	path = ft_strjoin("./maps/", arg);
-	if (!path)
-		exit(EXIT_FAILURE);
-	fd = open(path, O_RDONLY);
-	free(path);
-	if (fd == -1)
-		exit_err(errno);
-	data->map = minfo(arg, fd);
-	printf_tab(data->map);
+	// check_arg(argc, argv);
+	// path = ft_strjoin("./maps/", argv[1]);
+	// printf("path is %s", path);
+    fd = open("test.txt", O_RDONLY);
+    row_size = 0;
+	line = "hey";
+    while (line)
+    {
+        line = get_next_line(fd);
+        printf("line is %s",line);
+		if (line == 0 || *line == '\n')
+			break;
+        row_size++;
+    }
+    close(fd);
+	//on doit parse les infos ds un double tableau
+	printf("final is %zu\n", row_size);
+	tab = calloc(row_size + 1, sizeof(char*));
+	fd = open("test.txt", O_RDONLY);
+	size_t i = 0;
+	while (i < row_size)
+	{
+		tab[i] = get_next_line(fd);
+		i++;
+	}
+	tab[i] = NULL;
+	fd = open("test.txt", O_RDONLY);
+	char *str;
+	str = get_next_line(fd);
+	for (i = 0; i < row_size; i++) {
+		printf("%s\n", tab[i]);
+    }
+
 }
-
-int	main(int ac, char **av)
-{
-	int		check;
-	t_map	data;
-	t_hook	disp;
-
-	check_arg(ac, av[1]);
-	mdup(av[1], &data);
-}
+		// 	fd = open("test.txt", O_RDONLY);
+		// size_t a = 0;
+		// char *str;
+		// str = get_next_line(fd);
+		// while(str[a] != '\0')
+		// {
+		// 	printf("%c",str[a]);
+		// 	a++;
+		// }
+		// for (i = 0; i < row_size; i++) {
+		// 	for (size_t k = 0; k < a; k++) {
+		// 		printf("%c\n", tab[i][k]);
+		// 	}
+    	// }

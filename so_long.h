@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:37:29 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/23 15:01:18 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/24 11:13:59 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "./Libft/libft.h"
-#include "./gnl/get_next_line.h"
+#include "./get_next_line.h"
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -22,6 +22,7 @@
 # include <mlx.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <string.h>
 
 // //I highly recommend using stack-allocated memory as much as possible, as it will make your life so much easier when you need to exit the program.
 // typedef struct s_data
@@ -92,11 +93,6 @@ typedef struct	s_program {
 typedef struct t_struct
 {
 	char	**map;
-	char	path[1];
-	int		isize[2];
-	size_t	item;
-	size_t	mpos[2];
-	size_t	ppos[2];
 }	t_map;
 
 typedef struct t_struct1
