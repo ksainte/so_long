@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:47:02 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/23 14:40:48 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/25 13:46:08 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1
 # endif
 
 char	*get_next_line(int fd);

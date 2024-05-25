@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:46:50 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/24 21:28:48 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/25 16:26:39 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,26 @@ char	*get_str(char *test, char *buff, char *str)
 	if (test[i] == '\0')
 		str = (char *)malloc(sizeof(char) * (i + 1));
 	else if (test[i] == '\n' || i == 0)
-		str = (char *)malloc(sizeof(char) * (i + 1));
+		str = (char *)malloc(sizeof(char) * (i + 2));
 	if (str == NULL)
 		return (NULL);
 	//donc si ton tab[10] est un \n par exemple, ton i sera de 10, ton dernier el est tab[9]
 	//il va copier les el avant n, donc de 0 a 9 dans memcpy, de tab[0] a tab[9]
 	str = ft_memcpy(str, test, i);
-	// if (test[i] == '\n')
-	// {
-	// 	str[i] = test[i];
-	// 	str[i + 1] = '\0';//on boucle le str avec un 0
-	// 	ft_memcpy(&buff[0], &test[i + 1], ft_strlen1(test) - i - 1);//on reprend apd de tab[11] pr len - i - 1, donc si len = 20, i = 10 car tab[10] = n,on veut copier el de tab[11] a tab[19], tab[20] etant NULL, on envoie a memcpy 20 - 10 - 1= 9 elements, cp de 0 a 8 avec memcpy 
-	// 	ft_bzero(&buff[ft_strlen1(test) - i - 1], BUFFER_SIZE - (ft_strlen1(test) - i - 1));//apd du buff[20 - 10 - 1] donc buff[9], buff[0] a buff[8] etant fill, on paste 0 apd de buff[9], 42 - (20 - 10 - 1) = 42 - 9 = 33, donc 33 zeros a la geule, 9 char etant fill, de 0 a  8, 9 + 33 = 42 el
-	// }
 	if (test[i] == '\n')
 	{
-		str[i] = '\0';
-		// str[i + 1] = '\0';//on boucle le str avec un 0
+		str[i] = test[i];
+		str[i + 1] = '\0';//on boucle le str avec un 0
 		ft_memcpy(&buff[0], &test[i + 1], ft_strlen1(test) - i - 1);//on reprend apd de tab[11] pr len - i - 1, donc si len = 20, i = 10 car tab[10] = n,on veut copier el de tab[11] a tab[19], tab[20] etant NULL, on envoie a memcpy 20 - 10 - 1= 9 elements, cp de 0 a 8 avec memcpy 
 		ft_bzero(&buff[ft_strlen1(test) - i - 1], BUFFER_SIZE - (ft_strlen1(test) - i - 1));//apd du buff[20 - 10 - 1] donc buff[9], buff[0] a buff[8] etant fill, on paste 0 apd de buff[9], 42 - (20 - 10 - 1) = 42 - 9 = 33, donc 33 zeros a la geule, 9 char etant fill, de 0 a  8, 9 + 33 = 42 el
 	}
+	// if (test[i] == '\n')
+	// {
+	// 	str[i] = '\0';
+	// 	// str[i + 1] = '\0';//on boucle le str avec un 0
+	// 	ft_memcpy(&buff[0], &test[i + 1], ft_strlen1(test) - i - 1);//on reprend apd de tab[11] pr len - i - 1, donc si len = 20, i = 10 car tab[10] = n,on veut copier el de tab[11] a tab[19], tab[20] etant NULL, on envoie a memcpy 20 - 10 - 1= 9 elements, cp de 0 a 8 avec memcpy 
+	// 	ft_bzero(&buff[ft_strlen1(test) - i - 1], BUFFER_SIZE - (ft_strlen1(test) - i - 1));//apd du buff[20 - 10 - 1] donc buff[9], buff[0] a buff[8] etant fill, on paste 0 apd de buff[9], 42 - (20 - 10 - 1) = 42 - 9 = 33, donc 33 zeros a la geule, 9 char etant fill, de 0 a  8, 9 + 33 = 42 el
+	// }
 	else
 		str[i] = '\0';
 	return (str);

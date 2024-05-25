@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksainte <ksainte19@student.s19>            +#+  +:+       +#+        */
+/*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:14:25 by ksainte           #+#    #+#             */
-/*   Updated: 2024/04/03 23:20:55 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/25 17:28:51 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ char	*ft_strtrim(char const *s1, char const *set)
 	str[i] = 0;
 	return (str);
 }
+// #include<stdio.h>
+// int main()
+// {
+//     char *s1 ="AAZAABonjour toiSDSAFAAAAAAAAAA";
+//     char *set = "L";
+// 	// char *set = NULL;
+//     char *check;
 
-/*int main()
-{
-    char *s1 ="AAZAABonjour toiSDSAFAAAAAAAAAA";
-    //char *set = "AFDZ";
-	char *set = NULL;
-    char *check;
-
-    check = ft_strtrim(s1,set);
-    printf("%s",check);
-    return (0); 
-}*/
+//     check = ft_strtrim(s1,set);
+//     printf("%s",check);
+//     return (0); 
+// }
