@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:14:25 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/25 17:28:51 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/27 12:24:19 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 // int main()
 // {
 //     char *s1 ="AAZAABonjour toiSDSAFAAAAAAAAAA";
-//     char *set = "L";
+//     char *set = "A";
 // 	// char *set = NULL;
 //     char *check;
 
 //     check = ft_strtrim(s1,set);
 //     printf("%s",check);
+// 		system("leaks -q -fullContent $(ps -o pid= -p $PPID)");
 //     return (0); 
 // }

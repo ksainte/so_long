@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:37:29 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/24 11:13:59 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/27 12:45:28 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ t_window	ft_new_window(void *mlx, int widht, int height, char *name);
 t_image		ft_new_sprite(void *mlx, char *path);
 void	open_wallimgs_up(t_program *game);
 void	open_wallimgs_down(t_program *game);
+char	*ft_strtrim_end(char const *s1, char const *set);
 
 
 t_color		new_color(int r, int g, int b, int a);

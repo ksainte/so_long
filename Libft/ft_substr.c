@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksainte <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:13:49 by ksainte           #+#    #+#             */
-/*   Updated: 2023/04/13 10:13:50 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/27 09:42:40 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,16 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (s2);
 	}
 }
-/*int main()
-{
-    //char s[] = "hola";
-	char s[] = "lorem ipsum dolor";
-	char *str;	
-	str = ft_substr(s,0,10);
-	//str = ft_substr(s,0,10);
-	printf("%s",str);
-	return (0);
-}*/
+
+// #include<stdio.h>
+// int main()
+// {
+//     //char s[] = "hola";
+// 	char s[] = "lorem ipsum dolor";
+// 	char *str;	
+// 	str = ft_substr(s,0,3);
+// 	//str = ft_substr(s,0,10);
+// 	printf("%s",str);
+// 		system("leaks -q -fullContent $(ps -o pid= -p $PPID)");
+// 	return (0);
+// }
