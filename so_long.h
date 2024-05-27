@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:37:29 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/27 12:45:28 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/27 18:15:58 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,15 @@ typedef struct	s_program {
 
 typedef struct t_struct
 {
-	char	**map;
+	char	**tab;
+	char 	*line;
+	int 	row;
+	int		fd;
+	int		return_value;
+	size_t	row_size;
+	int 	counter_cltb;
+	int 	counter_exit;
+	int 	counter_pos;
 }	t_map;
 
 typedef struct t_struct1
@@ -114,6 +122,13 @@ t_image		ft_new_sprite(void *mlx, char *path);
 void	open_wallimgs_up(t_program *game);
 void	open_wallimgs_down(t_program *game);
 char	*ft_strtrim_end(char const *s1, char const *set);
+int ft_is_rectangular(t_map *map);
+int ft_has_walls(t_map *map);
+int char_check(char c, t_map *map);
+int ft_char_is_legit(t_map *map);
+int ft_n_in_line(char *str);
+void	free_table(char **buffer);
+void	ft_error(void);
 
 
 t_color		new_color(int r, int g, int b, int a);
