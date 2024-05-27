@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:58:19 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/27 18:40:20 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/27 20:11:39 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@
 // 	}
 // 	return ;
 // }
-// int ft_has_valid_path(char **tab)
-// {
-	
-// 	return(1)
-// }
+
+static	void ft_has_valid_path(t_map *map)
+{
+	printf("\nCE is %d\n", map->counter_exit);
+	printf("CC is %d\n", map->counter_cltb);
+	printf("CP is %d\n", map->counter_pos);
+}
 
 
 void ft_valid_map(t_map *map)
@@ -41,6 +43,7 @@ void ft_valid_map(t_map *map)
 		printf("\nmap is not ok");
 		ft_error();
 	}
+	ft_has_valid_path(map);
 }
 
 void ft_row_number(t_map *map)
@@ -110,7 +113,7 @@ int	main()
 	// check_arg(argc, argv);
 	// path = ft_strjoin("./maps/", argv[1]);
     ft_row_number(&map);
-	printf("\nthere is %d rows\n\n", map.row);
+	// printf("\nthere is %d rows\n\n", map.row);
     ft_fill_tab(&map);
 	ft_valid_map(&map);
 	free_table(map.tab);
