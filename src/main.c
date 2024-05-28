@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:58:19 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/28 19:38:27 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/28 20:04:57 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,31 @@ void ft_paste_start(t_program *program, t_map *map)
 	 x++;
     }
 }
+void ft_paste_bg(t_program *program, t_map *map)
+{
+	size_t x;
+    size_t y;
+	
+	program->sprite_position.x = 0;
+	program->sprite_position.y = 0;
+	program->sprite = ft_new_sprite(program->mlx, "Background.xpm");
+    x = 0;
+    while(x < map->row)
+    {
+     y = 0;
+     while(y < map->row_size)
+     {
+		mlx_put_image_to_window(program->mlx, program->window.reference,
+		program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
+		program->sprite_position.x += 64;//avance de 1 dans l axe des x
+		program->sprite_position.y = program->sprite_position.y;//reste sur l axe des y
+		 y++;
+     }
+	 program->sprite_position.y +=64;//descends de 1 dans l axe des y
+	 program->sprite_position.x = 0;//repars a 1 dans l axe des x
+	 x++;
+    }
+}
 
 void ft_init_window(t_program *program, t_map *map)
 {
@@ -256,10 +281,22 @@ void ft_init_window(t_program *program, t_map *map)
 	if(program->lenght > 2560 || program->height > 1440)
 		ft_error();
 	program->window = ft_new_window(program->mlx, program->lenght, program->height, "Hello world!");
+	ft_paste_bg(program, map);
 	ft_paste_walls(program, map);
 	ft_paste_cltbs(program, map);
 	ft_paste_exit(program, map);
-	ft_paste_start(program, map);
+	// ft_paste_start(program, map);
+}
+
+void ft_init_player(t_program *program, t_map *map)
+{
+	program->sprite = ft_new_sprite(program->mlx, "player_01.xpm");
+    program->sprite_position.x = map->starting_y * 64;
+    program->sprite_position.y = map->starting_x * 64;
+    mlx_put_image_to_window(program->mlx, program->window.reference,
+        program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
+	mlx_key_hook(program->window.reference, *ft_input, program);
+
 }
 
 // int	main(int argc, char **argv)
@@ -277,6 +314,7 @@ int	main()
     ft_fill_tab(&map);
 	ft_valid_map(&map);
 	ft_init_window(&program, &map);
+	ft_init_player(&program, &map);
 	mlx_loop(program.mlx);
 	free_table(map.tab);
 	free_table(map.tmp);

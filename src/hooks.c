@@ -8,8 +8,10 @@ int	ft_input(int key, void *param)
 	t_program *program = (t_program *)param;
 
 	// mlx function that clears the window
-	mlx_clear_window(program->mlx, program->window.reference);
-
+	// mlx_clear_window(program->mlx, program->window.reference);
+	// program->sprite = ft_bgd_sprite(program->mlx, "Background.xpm");
+	// mlx_put_image_to_window(program->mlx, program->window.reference,
+	// 	program->sprite.reference_bgd, program->sprite_position.x, program->sprite_position.y);
 	// move in a direction based on the key
 	if (key == 124)
 		program->sprite_position.x += program->sprite.size.x;
@@ -31,7 +33,6 @@ int	ft_input(int key, void *param)
 	// (the position 0,0 is the upper-left corner)
 	mlx_put_image_to_window(program->mlx, program->window.reference,
 		program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
-
 	// print the key pressed so you know the number of each key
 	printf("Key pressed -> %d\n", key);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:37:29 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/28 18:12:22 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/28 20:22:30 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_color {
 /* all info needed for an image */
 typedef struct	s_image {
 	void		*reference;
+	void		*reference_bgd;
 	t_vector	size;
 	char		*pixels;
 	int			bits_per_pixel;
@@ -139,6 +140,7 @@ int 		ft_char_is_legit(t_map *map);
 int 		ft_n_in_line(char *str);
 void		free_table(char **buffer);
 void		ft_error(void);
+t_image ft_bgd_sprite(void *mlx, char *path);
 
 
 t_color		new_color(int r, int g, int b, int a);
