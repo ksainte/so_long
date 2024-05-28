@@ -56,7 +56,7 @@ int ft_is_rectangular(t_map *map)
 			return(0);
 		i++;
 	}
-	// printf("\n is rectangular ok");
+	printf("\nis rectangular ok");
 	map->row_size = ft_strlen(map->tab[0]);
 	return(1);
 }
@@ -88,7 +88,7 @@ int ft_has_walls(t_map *map)
 			return(0);
 		y++;
 	}
-	// printf("\n has walls ok");
+	printf("\nhas walls ok");
 	return(1);
 }
 int char_check(char c, t_map *map)
@@ -124,12 +124,18 @@ int ft_char_is_legit(t_map *map)
 		{
 			if(!char_check(map->tab[x][y], map))
 					return(0);
+			if(map->tab[x][y] == 'P')
+			{
+				map->starting_x = x;
+				map->starting_y = y;
+			}
 			y++;
 		}
 	x++;
 	}
 	if(map->counter_exit == 0 || map->counter_cltb == 0 || map->counter_pos == 0)
 			return(0);
+	printf("\nchar is legit ok");
 	return(1);
 }
 

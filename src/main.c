@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:58:19 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/27 20:11:39 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/28 12:41:34 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,57 @@
 // 	return ;
 // }
 
-static	void ft_has_valid_path(t_map *map)
-{
-	printf("\nCE is %d\n", map->counter_exit);
-	printf("CC is %d\n", map->counter_cltb);
-	printf("CP is %d\n", map->counter_pos);
-}
 
+static	void ft_has_valid_path(t_map *map, int x, int y)
+{
+	
+	if(map->tmp[x][y] == 'E')
+		map->has_exit = 1;
+	if(map->tmp[x][y] == 'C')
+		map->has_all_cltb--;
+	//valid paths on the way, if you can reach C and E through it youre good to go
+	if(map->tmp[x][y] == '0' || map->tmp[x][y] == 'C' || map->tmp[x][y] == 'E' || map->tmp[x][y] == 'P')
+	{
+		map->tmp[x][y] = '2';
+		ft_has_valid_path(map, x - 1, y);
+		ft_has_valid_path(map, x + 1, y);
+		ft_has_valid_path(map, x, y - 1);
+		ft_has_valid_path(map, x, y + 1);  
+	}
+}
+void ft_init_tmp(t_map *map)
+{
+	int x;
+
+	x = 0;
+	map->tmp = ft_calloc(map->row + 1, sizeof(char*));
+	while(map->tab[x])
+	{
+			map->tmp[x] = ft_strdup(map->tab[x]);
+			x++;
+	}
+	map->tmp[x]= NULL;
+}
 
 void ft_valid_map(t_map *map)
 {
 	
 	if (ft_is_rectangular(map) && ft_has_walls(map) && ft_char_is_legit(map))
 	{
-		printf("\n map is ok");
+		printf("\nmap is ok");
 	}
 	else
 	{
 		printf("\nmap is not ok");
 		ft_error();
 	}
-	ft_has_valid_path(map);
+	map->has_all_cltb = map->counter_cltb;
+	ft_init_tmp(map);
+	ft_has_valid_path(map, map->starting_x, map->starting_y);
+	if(map->has_exit == 1 && map->has_all_cltb == 0)
+		printf("\nmap has valid path");
+	else
+		printf("\npath is invalid");
 }
 
 void ft_row_number(t_map *map)
@@ -117,6 +147,7 @@ int	main()
     ft_fill_tab(&map);
 	ft_valid_map(&map);
 	free_table(map.tab);
+	free_table(map.tmp);
 	system("leaks -q -fullContent $(ps -o pid= -p $PPID)");
 }
 

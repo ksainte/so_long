@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:37:29 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/27 18:15:58 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/28 10:49:12 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct	s_program {
 typedef struct t_struct
 {
 	char	**tab;
+	char	**tmp;
 	char 	*line;
 	int 	row;
 	int		fd;
@@ -101,6 +102,10 @@ typedef struct t_struct
 	int 	counter_cltb;
 	int 	counter_exit;
 	int 	counter_pos;
+	int		starting_x;
+	int		starting_y;
+	int		has_exit;
+	int		has_all_cltb;
 }	t_map;
 
 typedef struct t_struct1
