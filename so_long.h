@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:37:29 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/28 10:49:12 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/28 18:12:22 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 // 	void		*textures[5]; // MLX image pointers (on the stack)
 // 	//t_map		*map; // Map pointer (contains map details - preferably kept on the stack)
 // }	t_data;
+
+# define LENGTH 400
+# define HEIGHT 100
 
 # ifndef ANIMATION_FRAMES
 #  define ANIMATION_FRAMES 10
@@ -88,6 +91,8 @@ typedef struct	s_program {
 	t_vector	sprite_position;
 	t_wall_img	wall_imgs;
 	t_vector	img_size;
+	size_t		lenght;
+	size_t		height;
 }				t_program;
 
 typedef struct t_struct
@@ -95,7 +100,7 @@ typedef struct t_struct
 	char	**tab;
 	char	**tmp;
 	char 	*line;
-	int 	row;
+	size_t 	row;
 	int		fd;
 	int		return_value;
 	size_t	row_size;
@@ -124,16 +129,16 @@ typedef struct t_struct1
 
 t_window	ft_new_window(void *mlx, int widht, int height, char *name);
 t_image		ft_new_sprite(void *mlx, char *path);
-void	open_wallimgs_up(t_program *game);
-void	open_wallimgs_down(t_program *game);
-char	*ft_strtrim_end(char const *s1, char const *set);
-int ft_is_rectangular(t_map *map);
-int ft_has_walls(t_map *map);
-int char_check(char c, t_map *map);
-int ft_char_is_legit(t_map *map);
-int ft_n_in_line(char *str);
-void	free_table(char **buffer);
-void	ft_error(void);
+void		open_wallimgs_up(t_program *game);
+void		open_wallimgs_down(t_program *game);
+char		*ft_strtrim_end(char const *s1, char const *set);
+int 		ft_is_rectangular(t_map *map);
+int 		ft_has_walls(t_map *map);
+int 		char_check(char c, t_map *map);
+int 		ft_char_is_legit(t_map *map);
+int 		ft_n_in_line(char *str);
+void		free_table(char **buffer);
+void		ft_error(void);
 
 
 t_color		new_color(int r, int g, int b, int a);

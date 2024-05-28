@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:58:19 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/28 12:41:34 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/28 19:38:27 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void ft_fill_tab(t_map *map)
 {
     char *tmp;
 	char *tmp1;
-    int   i;
+    size_t   i;
 
     i = 0;
 	map->tab = calloc(map->row + 1, sizeof(char*));
@@ -133,10 +133,140 @@ void ft_fill_tab(t_map *map)
         printf("Error\n");
 }
 
+void ft_paste_walls(t_program *program, t_map *map)
+{
+	size_t x;
+    size_t y;
+	
+	program->sprite_position.x = 0;
+	program->sprite_position.y = 0;
+	program->sprite = ft_new_sprite(program->mlx, "block.xpm");
+    x = 0;
+    while(x < map->row)
+    {
+     y = 0;
+     while(y < map->row_size)
+     {
+         if(map->tab[x][y] == '1')
+		 {
+			mlx_put_image_to_window(program->mlx, program->window.reference,
+			program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
+		 }
+		program->sprite_position.x += 64;//avance de 1 dans l axe des x
+		program->sprite_position.y = program->sprite_position.y;//reste sur l axe des y
+		 y++;
+     }
+	 program->sprite_position.y +=64;//descends de 1 dans l axe des y
+	 program->sprite_position.x = 0;//repars a 1 dans l axe des x
+	 x++;
+    }
+}
+
+void ft_paste_cltbs(t_program *program, t_map *map)
+{
+	size_t x;
+    size_t y;
+	
+	program->sprite_position.x = 0;
+	program->sprite_position.y = 0;
+	program->sprite = ft_new_sprite(program->mlx, "enemy_01.xpm");
+    x = 0;
+    while(x < map->row)
+    {
+     y = 0;
+     while(y < map->row_size)
+     {
+         if(map->tab[x][y] == 'C')
+		 {
+			mlx_put_image_to_window(program->mlx, program->window.reference,
+			program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
+		 }
+		program->sprite_position.x += 64;//avance de 1 dans l axe des x
+		program->sprite_position.y = program->sprite_position.y;//reste sur l axe des y
+		 y++;
+     }
+	 program->sprite_position.y +=64;//descends de 1 dans l axe des y
+	 program->sprite_position.x = 0;//repars a 1 dans l axe des x
+	 x++;
+    }
+}
+void ft_paste_exit(t_program *program, t_map *map)
+{
+	size_t x;
+    size_t y;
+	
+	program->sprite_position.x = 0;
+	program->sprite_position.y = 0;
+	program->sprite = ft_new_sprite(program->mlx, "door_01.xpm");
+    x = 0;
+    while(x < map->row)
+    {
+     y = 0;
+     while(y < map->row_size)
+     {
+         if(map->tab[x][y] == 'E')
+		 {
+			mlx_put_image_to_window(program->mlx, program->window.reference,
+			program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
+		 }
+		program->sprite_position.x += 64;//avance de 1 dans l axe des x
+		program->sprite_position.y = program->sprite_position.y;//reste sur l axe des y
+		 y++;
+     }
+	 program->sprite_position.y +=64;//descends de 1 dans l axe des y
+	 program->sprite_position.x = 0;//repars a 1 dans l axe des x
+	 x++;
+    }
+}
+void ft_paste_start(t_program *program, t_map *map)
+{
+	size_t x;
+    size_t y;
+	
+	program->sprite_position.x = 0;
+	program->sprite_position.y = 0;
+	program->sprite = ft_new_sprite(program->mlx, "effect_w.xpm");
+    x = 0;
+    while(x < map->row)
+    {
+     y = 0;
+     while(y < map->row_size)
+     {
+         if(map->tab[x][y] == 'P')
+		 {
+			mlx_put_image_to_window(program->mlx, program->window.reference,
+			program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
+		 }
+		program->sprite_position.x += 64;//avance de 1 dans l axe des x
+		program->sprite_position.y = program->sprite_position.y;//reste sur l axe des y
+		 y++;
+     }
+	 program->sprite_position.y +=64;//descends de 1 dans l axe des y
+	 program->sprite_position.x = 0;//repars a 1 dans l axe des x
+	 x++;
+    }
+}
+
+void ft_init_window(t_program *program, t_map *map)
+{
+	
+	program->mlx = mlx_init();
+	program->lenght = map->row_size * 64;
+	program->height = map->row * 64;
+	if(program->lenght > 2560 || program->height > 1440)
+		ft_error();
+	program->window = ft_new_window(program->mlx, program->lenght, program->height, "Hello world!");
+	ft_paste_walls(program, map);
+	ft_paste_cltbs(program, map);
+	ft_paste_exit(program, map);
+	ft_paste_start(program, map);
+}
+
 // int	main(int argc, char **argv)
 int	main()
 {
     static t_map   map;
+	t_program 	program;
 	// char *path;
 
 
@@ -146,6 +276,8 @@ int	main()
 	// printf("\nthere is %d rows\n\n", map.row);
     ft_fill_tab(&map);
 	ft_valid_map(&map);
+	ft_init_window(&program, &map);
+	mlx_loop(program.mlx);
 	free_table(map.tab);
 	free_table(map.tmp);
 	system("leaks -q -fullContent $(ps -o pid= -p $PPID)");

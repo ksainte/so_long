@@ -6,12 +6,12 @@
 #    By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/21 13:23:41 by ksainte           #+#    #+#              #
-#    Updated: 2024/05/28 11:29:49 by ksainte          ###   ########.fr        #
+#    Updated: 2024/05/28 19:18:03 by ksainte          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc -g3
-CFLAGS = -Wall -Wextra -Werror
+CC = gcc -g3 -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 SRCS = src/main.c src/color.c src/hooks.c src/window.c src/image.c src/open.c src/get_next_line.c src/get_next_line_utils.c src/utils.c
 LIBFT_PATH = Libft
 MLX_PATH = mlx
