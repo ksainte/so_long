@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:37:29 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/28 20:22:30 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/30 14:42:10 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,6 @@ typedef struct s_color {
 	int a;
 }	t_color;
 
-/* all info needed for an image */
-typedef struct	s_image {
-	void		*reference;
-	void		*reference_bgd;
-	t_vector	size;
-	char		*pixels;
-	int			bits_per_pixel;
-	int			line_size;
-	int			endian;
-}				t_image;
 /* All posible wall images */
 typedef struct s_wall_img
 {
@@ -85,16 +75,16 @@ typedef struct s_wall_img
 	void	*left;
 }	t_wall_img;
 
-typedef struct	s_program {
-	void		*mlx;
-	t_window	window;
-	t_image		sprite;
-	t_vector	sprite_position;
-	t_wall_img	wall_imgs;
-	t_vector	img_size;
-	size_t		lenght;
-	size_t		height;
-}				t_program;
+/* all info needed for an image */
+typedef struct	s_image {
+	void		*reference;
+	void		*reference_bgd;
+	t_vector	size;
+	char		*pixels;
+	int			bits_per_pixel;
+	int			line_size;
+	int			endian;
+}				t_image;
 
 typedef struct t_struct
 {
@@ -114,19 +104,19 @@ typedef struct t_struct
 	int		has_all_cltb;
 }	t_map;
 
-typedef struct t_struct1
-{
-	char	**map;
-	int		dir[2];
-	int		isize[2];
-	int		move;
-	size_t	item;
-	size_t	ipos[2];
-	size_t	ppos[2];
-	void	*img;
-	void	*mlx_p;
-	void	*mlx_w;
-}	t_hook;
+typedef struct	s_program {
+	void		*mlx;
+	t_window	window;
+	t_image		sprite;
+	t_image		sprite2;//la structure(&?)
+	t_map		*map;//un pointeur sur une struct de type t_map
+	t_vector	sprite_position;
+	t_wall_img	wall_imgs;
+	t_vector	img_size;
+	size_t		lenght;
+	size_t		height;
+}				t_program;
+
 
 t_window	ft_new_window(void *mlx, int widht, int height, char *name);
 t_image		ft_new_sprite(void *mlx, char *path);

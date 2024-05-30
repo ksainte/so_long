@@ -6,20 +6,35 @@
 int	ft_input(int key, void *param)
 {
 	t_program *program = (t_program *)param;
+	// t_map *map = (t_map *)param;
 
 	// mlx function that clears the window
 	// mlx_clear_window(program->mlx, program->window.reference);
-	// program->sprite = ft_bgd_sprite(program->mlx, "Background.xpm");
-	// mlx_put_image_to_window(program->mlx, program->window.reference,
-	// 	program->sprite.reference_bgd, program->sprite_position.x, program->sprite_position.y);
-	// move in a direction based on the key
-	if (key == 124)
+
+	program->sprite2 = ft_bgd_sprite(program->mlx, "Background.xpm");
+	mlx_put_image_to_window(program->mlx, program->window.reference,
+		program->sprite2.reference_bgd, program->sprite_position.x, program->sprite_position.y);
+
+
+	// program->sprite_position.x = map->starting_y * 64;
+    // program->sprite_position.y = map->starting_x * 64;
+
+	int x;
+    int y;
+
+	x = program->map->starting_x;//ligne
+	y = program->map->starting_y;//colonne
+	printf("x is %d\n", x);
+	printf("y is %d\n", y);
+	// map->tab[x][y + 1] != '1'
+
+	if (key == 124) //go to right
 		program->sprite_position.x += program->sprite.size.x;
-	else if (key == 123)
+	else if (key == 123) //go to left
 		program->sprite_position.x -= program->sprite.size.x;
-	else if (key == 125)
+	else if (key == 125)//go down
 		program->sprite_position.y += program->sprite.size.y;
-	else if (key == 126)
+	else if (key == 126)//go up
 		program->sprite_position.y -= program->sprite.size.y;
 	// change color based on keys R, G and B.
 	else if (key == 15)

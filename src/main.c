@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:58:19 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/28 20:04:57 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/30 14:32:57 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,11 +293,24 @@ void ft_init_player(t_program *program, t_map *map)
 	program->sprite = ft_new_sprite(program->mlx, "player_01.xpm");
     program->sprite_position.x = map->starting_y * 64;
     program->sprite_position.y = map->starting_x * 64;
+	program->map = map;
+	printf("\nx og is %d\n", map->starting_x);
+	printf("y og is %d\n", map->starting_y);
     mlx_put_image_to_window(program->mlx, program->window.reference,
         program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
 	mlx_key_hook(program->window.reference, *ft_input, program);
-
+	printf("\ntest\n");
+	printf("test 2\n");
 }
+
+// void ft_move_player(t_program *program, t_map *map)
+// {
+	
+//     mlx_put_image_to_window(program->mlx, program->window.reference,
+//         program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
+// 	// mlx_key_hook(program->window.reference, *ft_input, program);
+
+// }
 
 // int	main(int argc, char **argv)
 int	main()
@@ -315,6 +328,7 @@ int	main()
 	ft_valid_map(&map);
 	ft_init_window(&program, &map);
 	ft_init_player(&program, &map);
+	// ft_move_player(&program, &map);
 	mlx_loop(program.mlx);
 	free_table(map.tab);
 	free_table(map.tmp);
