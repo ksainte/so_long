@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:37:29 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/30 14:42:10 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/30 18:19:37 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,10 @@ typedef struct	s_program {
 	void		*mlx;
 	t_window	window;
 	t_image		sprite;
-	t_image		sprite2;//la structure(&?)
-	t_map		*map;//un pointeur sur une struct de type t_map
+	t_image		sprite2;//l'& de la struct t_image
+	t_map		*map;//un pointeur sur une struct de type t_map ou une & qui pointe vers l'& de la struct t_map
 	t_vector	sprite_position;
+	t_vector	input_position;
 	t_wall_img	wall_imgs;
 	t_vector	img_size;
 	size_t		lenght;
