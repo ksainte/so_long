@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:58:19 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/30 20:44:31 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/31 13:45:20 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static	void ft_has_valid_path(t_map *map, int x, int y)
 		ft_has_valid_path(map, x, y + 1);  
 	}
 }
+
 void ft_init_tmp(t_map *map)
 {
 	int x;
@@ -76,202 +77,6 @@ void ft_valid_map(t_map *map)
 		printf("\npath is invalid");
 }
 
-void ft_row_number(t_map *map)
-{
-    
-    map->fd = open("test.txt", O_RDONLY);
-	map->line = (char *)malloc(sizeof(char*));
-    while (map->line != NULL)
-    {
-		if (map->line)
-			free(map->line);
-        map->line = get_next_line(map->fd);
-		if (map->line == 0 || *map->line == '\n')
-			break;
-        map->row++;
-    }
-	while(map->line != 0){
-		free(map->line);
-		map->line = get_next_line(map->fd);
-		if (map->line && map->line[0] != '\n')
-		{
-			printf("exit\n");
-			free(map->line);
-			ft_error();
-		}
-	}
-	free(map->line);
-    map->return_value = close(map->fd);
-    if(map->return_value == -1)
-        printf("Error\n");
-}
-
-void ft_fill_tab(t_map *map)
-{
-    char *tmp;
-	char *tmp1;
-    size_t   i;
-
-    i = 0;
-	map->tab = calloc(map->row + 1, sizeof(char*));
-	map->fd = open("test.txt", O_RDONLY);
-	while (i < map->row)
-	{
-		map->tab[i] = get_next_line(map->fd);
-		tmp = map->tab[i];
-		map->tab[i] = ft_strtrim(map->tab[i], "\n");
-		tmp1 = map->tab[i];
-		map->tab[i] = ft_strtrim_end(map->tab[i], " ");
-		free(tmp);
-		free(tmp1);
-		// printf("%s", map->tab[i]);
-		i++;
-	}
-	map->tab[i] = NULL;
-	map->return_value = close(map->fd);
-    if(map->return_value == -1)
-        printf("Error\n");
-}
-
-void ft_paste_walls(t_program *program, t_map *map)
-{
-	size_t x;
-    size_t y;
-	
-	program->sprite_position.x = 0;
-	program->sprite_position.y = 0;
-	program->sprite = ft_new_sprite(program->mlx, "block.xpm");
-    x = 0;
-    while(x < map->row)
-    {
-     y = 0;
-     while(y < map->row_size)
-     {
-         if(map->tab[x][y] == '1')
-		 {
-			mlx_put_image_to_window(program->mlx, program->window.reference,
-			program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
-		 }
-		program->sprite_position.x += 64;//avance de 1 dans l axe des x
-		program->sprite_position.y = program->sprite_position.y;//reste sur l axe des y
-		 y++;
-     }
-	 program->sprite_position.y +=64;//descends de 1 dans l axe des y
-	 program->sprite_position.x = 0;//repars a 1 dans l axe des x
-	 x++;
-    }
-}
-
-void ft_paste_cltbs(t_program *program, t_map *map)
-{
-	size_t x;
-    size_t y;
-	
-	program->sprite_position.x = 0;
-	program->sprite_position.y = 0;
-	program->sprite = ft_new_sprite(program->mlx, "enemy_01.xpm");
-    x = 0;
-    while(x < map->row)
-    {
-     y = 0;
-     while(y < map->row_size)
-     {
-         if(map->tab[x][y] == 'C')
-		 {
-			mlx_put_image_to_window(program->mlx, program->window.reference,
-			program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
-		 }
-		program->sprite_position.x += 64;//avance de 1 dans l axe des x
-		program->sprite_position.y = program->sprite_position.y;//reste sur l axe des y
-		 y++;
-     }
-	 program->sprite_position.y +=64;//descends de 1 dans l axe des y
-	 program->sprite_position.x = 0;//repars a 1 dans l axe des x
-	 x++;
-    }
-}
-void ft_paste_exit(t_program *program, t_map *map)
-{
-	size_t x;
-    size_t y;
-	
-	program->sprite_position.x = 0;
-	program->sprite_position.y = 0;
-	program->sprite = ft_new_sprite(program->mlx, "door_01.xpm");
-    x = 0;
-    while(x < map->row)
-    {
-     y = 0;
-     while(y < map->row_size)
-     {
-         if(map->tab[x][y] == 'E')
-		 {
-			mlx_put_image_to_window(program->mlx, program->window.reference,
-			program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
-		 }
-		program->sprite_position.x += 64;//avance de 1 dans l axe des x
-		program->sprite_position.y = program->sprite_position.y;//reste sur l axe des y
-		 y++;
-     }
-	 program->sprite_position.y +=64;//descends de 1 dans l axe des y
-	 program->sprite_position.x = 0;//repars a 1 dans l axe des x
-	 x++;
-    }
-}
-void ft_paste_start(t_program *program, t_map *map)
-{
-	size_t x;
-    size_t y;
-	
-	program->sprite_position.x = 0;
-	program->sprite_position.y = 0;
-	program->sprite = ft_new_sprite(program->mlx, "effect_w.xpm");
-    x = 0;
-    while(x < map->row)
-    {
-     y = 0;
-     while(y < map->row_size)
-     {
-         if(map->tab[x][y] == 'P')
-		 {
-			mlx_put_image_to_window(program->mlx, program->window.reference,
-			program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
-		 }
-		program->sprite_position.x += 64;//avance de 1 dans l axe des x
-		program->sprite_position.y = program->sprite_position.y;//reste sur l axe des y
-		 y++;
-     }
-	 program->sprite_position.y +=64;//descends de 1 dans l axe des y
-	 program->sprite_position.x = 0;//repars a 1 dans l axe des x
-	 x++;
-    }
-}
-void ft_paste_bg(t_program *program, t_map *map)
-{
-	size_t x;
-    size_t y;
-	
-	program->sprite_position.x = 0;
-	program->sprite_position.y = 0;
-	program->sprite = ft_new_sprite(program->mlx, "Background.xpm");
-    x = 0;
-    while(x < map->row)
-    {
-     y = 0;
-     while(y < map->row_size)
-     {
-		mlx_put_image_to_window(program->mlx, program->window.reference,
-		program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
-		program->sprite_position.x += 64;//avance de 1 dans l axe des x
-		program->sprite_position.y = program->sprite_position.y;//reste sur l axe des y
-		 y++;
-     }
-	 program->sprite_position.y +=64;//descends de 1 dans l axe des y
-	 program->sprite_position.x = 0;//repars a 1 dans l axe des x
-	 x++;
-    }
-}
-
 void ft_init_window(t_program *program, t_map *map)
 {
 	
@@ -299,12 +104,74 @@ void ft_init_player(t_program *program, t_map *map)
 	// printf("6 is %p\n", program->map);//
 	// printf("\nx og is %d\n", map->starting_x);
 	// printf("y og is %d\n", map->starting_y);
-	program->input_position.x = map->starting_x;//ligne
-	program->input_position.y = map->starting_y;//colonne
+	// program->input_position.x = map->starting_x;//ligne
+	// program->input_position.y = map->starting_y;//colonne
     mlx_put_image_to_window(program->mlx, program->window.reference,
         program->sprite.reference, program->sprite_position.x, program->sprite_position.y);
-	mlx_key_hook(program->window.reference, *ft_input, program);
+	// mlx_key_hook(program->window.reference, *ft_input, program);
+	mlx_hook(program->window.reference, 2,0,*ft_input, program);
 }
+// int ft_valid_path(t_map *map, int x, int y, int counter_cltb, int has_exit)
+// {	
+
+// 	if(has_exit == 0 && counter_cltb == 0)
+// 		return(1);
+// 	if(map->tmp[x][y] == 'E')
+// 		has_exit = 0;
+// 	if(map->tmp[x][y] == 'C')
+// 		counter_cltb--;
+// 	//valid paths on the way, if you can reach C and E through it youre good to go
+// 	if(map->tmp[x][y] == '0' || map->tmp[x][y] == 'C' || map->tmp[x][y] == 'E' || map->tmp[x][y] == 'P')
+// 	{
+// 		map->tmp[x][y] = '2';
+// 		ft_valid_path(map, x - 1, y, counter_cltb, has_exit);
+// 		ft_valid_path(map, x + 1, y, counter_cltb, has_exit);
+// 		ft_valid_path(map, x, y - 1, counter_cltb, has_exit);
+// 		ft_valid_path(map, x, y + 1, counter_cltb, has_exit);  
+// 	}
+// 	return(0);
+// }
+// int ft_spawn(t_map *map)
+// {
+// 	int x;
+// 	int y;
+	
+// 	x = 1;
+// 	while(map->tab[x])
+// 	{
+// 		y = 1;
+// 		while(map->tab[x][y])
+// 		{
+// 			if(map->tab[x][y] == '0' && ft_valid_path(map, x, y, map->counter_cltb, map->has_exit))
+// 			{
+// 				map->starting_x = x;
+// 				map->starting_y = y;
+// 				return(0);	
+// 			}
+// 			y++;
+// 		}
+// 		x++;
+// 	}
+// 	return(1);
+// }
+
+// void ft_init_enemy(t_program *program, t_map *map)
+// {
+// 	t_image img;
+
+// 	img.reference_enmy = mlx_xpm_file_to_image(program->mlx,"player_01.xpm", &img.size.x, &img.size.y);
+// 	// program->sprite = ft_new_sprite(program->mlx, "block.xpm");
+// 	ft_init_tmp(map);
+// 	ft_spawn(map);
+//     program->enmy_sprite_position.x = map->starting_y * 64;
+//     program->enmy_sprite_position.y = map->starting_x * 64;
+// 	printf("\n%d\n", map->starting_x);
+// 	printf("%d\n", map->starting_y);
+// 	// mlx_put_image_to_window(program->mlx, program->window.reference,
+// 	// 	img.reference_enmy, program->enmy_sprite_position.x, program->enmy_sprite_position.y);
+// 	// mlx_key_hook(program->window.reference, *ft_input, program);
+// 	// mlx_hook(program->window.reference, 2,0,*ft_input, program);
+// }
 
 
 // int	main(int argc, char **argv)
@@ -327,7 +194,7 @@ int	main()
 	ft_valid_map(&map);
 	ft_init_window(&program, &map);
 	ft_init_player(&program, &map);
-	// ft_move_player(&program, &map);
+	// ft_init_enemy(&program, &map);
 	mlx_loop(program.mlx);
 	free_table(map.tab);
 	free_table(map.tmp);

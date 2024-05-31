@@ -6,7 +6,7 @@
 /*   By: ksainte <ksainte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:37:29 by ksainte           #+#    #+#             */
-/*   Updated: 2024/05/30 18:19:37 by ksainte          ###   ########.fr       */
+/*   Updated: 2024/05/31 12:39:34 by ksainte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_wall_img
 typedef struct	s_image {
 	void		*reference;
 	void		*reference_bgd;
+	void		*reference_enmy;
 	t_vector	size;
 	char		*pixels;
 	int			bits_per_pixel;
@@ -111,6 +112,7 @@ typedef struct	s_program {
 	t_image		sprite2;//l'& de la struct t_image
 	t_map		*map;//un pointeur sur une struct de type t_map ou une & qui pointe vers l'& de la struct t_map
 	t_vector	sprite_position;
+	t_vector	enmy_sprite_position;
 	t_vector	input_position;
 	t_wall_img	wall_imgs;
 	t_vector	img_size;
@@ -131,7 +133,15 @@ int 		ft_char_is_legit(t_map *map);
 int 		ft_n_in_line(char *str);
 void		free_table(char **buffer);
 void		ft_error(void);
-t_image ft_bgd_sprite(void *mlx, char *path);
+void ft_paste_walls(t_program *program, t_map *map);
+void ft_paste_cltbs(t_program *program, t_map *map);
+void ft_paste_exit(t_program *program, t_map *map);
+void ft_paste_start(t_program *program, t_map *map);
+void ft_paste_bg(t_program *program, t_map *map);
+void ft_row_number(t_map *map);
+void ft_fill_tab(t_map *map);
+void ft_init_tmp(t_map *map);
+void ft_valid_map(t_map *map);
 
 
 t_color		new_color(int r, int g, int b, int a);
